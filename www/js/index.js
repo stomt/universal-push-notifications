@@ -41,13 +41,16 @@ var app = {
         console.log('calling push init');
         var push = PushNotification.init({
             "android": {
-                "senderID": "XXXXXXXX"
+                "senderID": "604077393164"
             },
             "browser": {},
             "ios": {
                 "sound": true,
                 "vibration": true,
-                "badge": true
+                "badge": true,
+                // use fcm to push via APNs (not received)
+                // "senderID": "604077393164",
+                // "gcmSandbox": "false"
             },
             "windows": {}
         });
