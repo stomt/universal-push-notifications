@@ -1,6 +1,14 @@
 # universal-push-notifications
 Web app template which can handle push notifications on most platforms
 
+## Chrome/Firefox Support
+
+- serve the `www` folder on localhost and click the request permissions button
+
+## Safari Support
+
+TODO
+
 ## Install Phonegap Support
 
 - install phonegap
@@ -13,8 +21,6 @@ Web app template which can handle push notifications on most platforms
 [more](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/)
 
 - find registration event in the console logs
-
-
 
 
 ### iOS

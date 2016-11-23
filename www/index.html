@@ -49,12 +49,29 @@
             <p class="event waiting">Requesting Registration ID</p>
             <p class="event received">Registered</p>
         </div>
+
+        <button onclick="requestPermission()">Request Permission</button>
     </div>
+
+    <!-- START:Phonegap -->
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/indexPhonegap.js"></script>
     <script type="text/javascript">
         app.initialize();
     </script>
+    <!-- END:Phonegap -->
+
+    <!-- START:Firebase -->
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js"></script>
+    <script type="text/javascript">
+        var config = {
+            messagingSenderId: "604077393164"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="js/indexFirebase.js"></script>
+    <!-- END:Firebase -->
 </body>
 
 </html>
