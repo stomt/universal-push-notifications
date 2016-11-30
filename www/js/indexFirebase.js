@@ -31,6 +31,7 @@ var setupFirebasePush = function() {
         } else {
           pushManager.error('No Instance ID token available. Request permission to generate one.');
         }
+        pushManager.registerSuccessfulSetup('firebase', requestPermission);
       })
       .catch(function(err) {
         pushManager.error(err, 'Unable to retrieve refreshed token ');
@@ -48,5 +49,5 @@ var setupFirebasePush = function() {
   }
 
   getToken();
-  pushManager.registerSuccessfulSetup('firebase', requestPermission);
+
 };

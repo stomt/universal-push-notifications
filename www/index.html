@@ -30,7 +30,10 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/indexPhonegap.js"></script>
     <script type="text/javascript">
-        setupPhonegapPush();
+      function onLoad() {
+        document.addEventListener("deviceready", setupPhonegapPush, false);
+      }
+      onLoad();
     </script>
     <!-- END:Phonegap -->
 
