@@ -4,13 +4,7 @@ var pushManager = {
   setRegistrationId: function(id) {
     console.log('set registration id: ' + id);
 
-    // TODO: save and submit logic
-    // var oldRegId = localStorage.getItem('registrationId');
-    // if (oldRegId !== data.registrationId) {
-    //   // Save new registration ID
-    //   localStorage.setItem('registrationId', data.registrationId);
-    //   // Post registrationId to your app server as the value has changed
-    // }
+    schulcloud.sendRegistrationId(id);
   },
 
   error: function(error, msg) {
@@ -19,12 +13,6 @@ var pushManager = {
 
   handleNotification: function(data) {
     console.log('notification event', data);
-    navigator.notification.alert(
-      data.message,         // message
-      null,                 // callback
-      data.title,           // title
-      'Ok'                  // buttonName
-    );
   },
 
   requestPermission: function() {
@@ -37,4 +25,46 @@ var pushManager = {
     console.log('server ', service, ' is set up!');
     this.requestPermissionCallback = requestPermissionCallback;
   }
+};
+
+var schulcloud = {
+
+  sendRegistrationId: function(id) {
+    var url = 'http://localhost:3030/devices';
+    var method = 'POST';
+    var body = {
+      "service": "firebase",
+      "type": "mobile",
+      "name": "test2",
+      "user_token": "usertoken1",
+      "service_token": id,
+      "OS": "android7"
+    };
+    var data = JSON.stringify(body);
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 201) {
+        console.log(JSON.parse(xhr.responseText));
+      }
+    };
+    xhr.open(method, url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(data);
+
+    // Alternative implementation with fetch()
+    // fetch(url, {
+    //   method: method,
+    //   body: data,
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    //   .then(function(response) {
+    //     response.json().then(function(json) {
+    //       console.log(json);
+    //     })
+    //   });
+  }
+
 };
