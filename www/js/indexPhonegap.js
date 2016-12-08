@@ -30,6 +30,23 @@ var setupPhonegapPush = function() {
 
   push.on('notification', function(data) {
     pushManager.handleNotification(data);
+
+    sendShownCallback(data.additionalData);
+
+    if (data.additionalData.news && !data.additionalData.foreground) {
+      // https://github.com/katzer/cordova-plugin-local-notifications/wiki/04.-Scheduling
+      cordova.plugins.notification.local.schedule({
+        title: data.additionalData.news.title,
+        text: data.additionalData.news.body,
+        data: data.additionalData
+      });
+    }
   });
+
+  cordova.plugins.notification.local.on('click', function (notification, state) {
+    notification.data = JSON.parse(notification.data);
+    console.log('notification clicked', notification, state);
+    sendClickedCallback(notification.data);
+  }, this)
 
 };

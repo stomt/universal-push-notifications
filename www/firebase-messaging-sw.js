@@ -4,6 +4,7 @@
 // are not available in the service worker.
 importScripts('https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/3.6.2/firebase-messaging.js');
+importScripts('js/callback.js');
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
@@ -22,7 +23,8 @@ const messaging = firebase.messaging();
 // [START background_handler]
 messaging.setBackgroundMessageHandler(function(payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  payload.data.notification = JSON.parse(payload.data.notification);
+
+  payload.data.notification = JSON.parse(payload.data.news);
   // Customize notification here
   const notificationTitle = 'Max: ' + payload.data.notification.title;
   const notificationOptions = {
@@ -58,49 +60,3 @@ self.addEventListener('notificationclick', function(event) {
       return clients.openWindow('/');
   }));
 });
-
-var CALLBACK_TYPES = {
-  RECEIVED: 'received',
-  CLICKED: 'clicked'
-};
-var DEFAULT_HEADERS = {
-  'Content-Type': 'application/json'
-};
-
-function sendShownCallback(notificationData) {
-  var body = {
-    notificationId: notificationData.notificationId,
-    type: CALLBACK_TYPES.RECEIVED
-  };
-  return sendCallback(body)
-    .then(function(response) {
-      console.log(response);
-    });
-}
-
-function sendClickedCallback(notificationData) {
-  var body = {
-    notificationId: notificationData.notificationId,
-    type: CALLBACK_TYPES.CLICKED
-  };
-  return sendCallback(body)
-    .then(function(response) {
-      console.log(response);
-    });
-}
-
-function sendCallback(body) {
-  var url = 'http://localhost:3030/callback';
-  var method = 'POST';
-  var data = JSON.stringify(body);
-
-  return fetch(url, {
-    method: method,
-    body: data,
-    headers: DEFAULT_HEADERS
-  })
-    .then(function(response) {
-      return response.json();
-    });
-}
-
