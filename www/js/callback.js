@@ -12,10 +12,12 @@ function sendShownCallback(notificationData) {
     notificationId: notificationData.notificationId,
     type: CALLBACK_TYPES.RECEIVED
   };
-  return sendCallback(body)
-    .then(function(response) {
-      console.log(response);
-    });
+
+  function callback(response) {
+    console.log(response);
+  }
+
+  return sendCallback(body, callback);
 }
 
 function sendClickedCallback(notificationData) {
@@ -23,23 +25,30 @@ function sendClickedCallback(notificationData) {
     notificationId: notificationData.notificationId,
     type: CALLBACK_TYPES.CLICKED
   };
-  return sendCallback(body)
-    .then(function(response) {
-      console.log(response);
-    });
+
+  function callback(response) {
+    console.log(response);
+  }
+
+  return sendCallback(body, callback);
 }
 
-function sendCallback(body) {
+function sendCallback(body, callback) {
   var url = 'http://localhost:3030/callback';
-  var method = 'POST';
   var data = JSON.stringify(body);
 
-  return fetch(url, {
-    method: method,
-    body: data,
-    headers: DEFAULT_HEADERS
-  })
-    .then(function(response) {
-      return response.json();
-    });
+  postRequest(url, data, callback);
+}
+
+function postRequest(url, data, callback) {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 201) {
+      callback(this);
+    }
+  };
+  xhttp.open('POST', url, true);
+  xhttp.setRequestHeader("Content-type", DEFAULT_HEADERS['Content-Type']);
+  xhttp.send(data);
 }

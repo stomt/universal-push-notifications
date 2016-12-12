@@ -13,8 +13,8 @@ var setupPhonegapPush = function() {
       "vibration": true,
       "badge": true,
       // use fcm to push via APNs (not received)
-      // "senderID": "604077393164",
-      // "gcmSandbox": "false"
+      "senderID": "604077393164",
+      "gcmSandbox": "false"
     },
     "windows": {}
   });
@@ -40,6 +40,14 @@ var setupPhonegapPush = function() {
         text: data.additionalData.news.body,
         data: data.additionalData
       });
+    }
+
+    if (push.finish) {
+      push.finish(function() {
+        console.log('success');
+      }, function() {
+        console.log('error');
+      }, 'push-1');
     }
   });
 
