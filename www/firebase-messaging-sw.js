@@ -26,7 +26,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
 
   payload.data.notification = JSON.parse(payload.data.news);
   // Customize notification here
-  const notificationTitle = 'Max: ' + payload.data.notification.title;
+  const notificationTitle = payload.data.notification.title;
   const notificationOptions = {
     body: payload.data.notification.body,
     icon: '/img/logo.png',
