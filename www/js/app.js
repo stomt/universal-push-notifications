@@ -1,6 +1,17 @@
 var pushManager = {
   requestInitializationCallback: null,
   requestPermissionCallback: null,
+  requestInitialization: function() {
+    if (this.requestInitializationCallback) {
+      this.requestInitializationCallback();
+    }
+  },
+  requestPermission: function() {
+    if (this.requestPermissionCallback) {
+      this.requestPermissionCallback();
+    }
+  },
+
 
   setRegistrationId: function(id) {
     console.log('set registration id: ' + id);
@@ -14,19 +25,6 @@ var pushManager = {
 
   handleNotification: function(data) {
     console.log('notification event', data);
-  },
-
-  requestInitialization: function() {
-    if (this.requestInitializationCallback) {
-      this.requestInitializationCallback();
-    }
-  },
-
-
-  requestPermission: function() {
-    if (this.requestPermissionCallback) {
-      this.requestPermissionCallback();
-    }
   },
 
   registerSuccessfulSetup: function(service, requestPermissionCallback) {
