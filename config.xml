@@ -7,7 +7,7 @@
     <author email="max@klenk.biz">
         Max Klenk
     </author>
-    <content src="index.html" />
+    <content src="phonegap.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="StatusBarOverlaysWebView" value="false" />

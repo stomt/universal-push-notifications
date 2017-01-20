@@ -1,13 +1,14 @@
 # universal-push-notifications
-Web app template which can handle push notifications on most platforms
 
-## Chrome/Firefox Support
+Web app template which can handle push notifications on most platforms.
 
-- serve the `www` folder on localhost and click the request permissions button
+## Chrome/Firefox/Opera Support using Service Workers
+
+Serve the `www` folder on localhost and open `www/firebase.html`.
 
 ## Safari Support
 
-TODO
+The safari support requires you to serve `www/safari.html` on the domain you specified at apple.
 
 ## Install Phonegap Support
 
