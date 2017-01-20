@@ -5,13 +5,7 @@ var pushManager = {
   setRegistrationId: function(id) {
     console.log('set registration id: ' + id);
 
-    // TODO: save and submit logic
-    // var oldRegId = localStorage.getItem('registrationId');
-    // if (oldRegId !== data.registrationId) {
-    //   // Save new registration ID
-    //   localStorage.setItem('registrationId', data.registrationId);
-    //   // Post registrationId to your app server as the value has changed
-    // }
+    sendRegistrationId(id);
   },
 
   error: function(error, msg) {
@@ -20,12 +14,6 @@ var pushManager = {
 
   handleNotification: function(data) {
     console.log('notification event', data);
-    navigator.notification.alert(
-      data.message,         // message
-      null,                 // callback
-      data.title,           // title
-      'Ok'                  // buttonName
-    );
   },
 
   requestInitialization: function() {
