@@ -1,10 +1,7 @@
 var setupFirebasePush = function() {
-  if (!window.firebase) {
-    return;
-  }
 
   var config = {
-    messagingSenderId: "604077393164"
+    messagingSenderId: '604077393164'
   };
 
   firebase.initializeApp(config);
@@ -51,3 +48,5 @@ var setupFirebasePush = function() {
   getToken();
 
 };
+
+pushManager.requestPermissionCallback = setupFirebasePush;

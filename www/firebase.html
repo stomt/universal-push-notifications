@@ -7,18 +7,17 @@
 </head>
 
 <body>
+
+<button onclick="pushManager.requestInitialization()">Request Initialization</button>
 <button onclick="pushManager.requestPermission()">Request Permission</button>
 
 <!-- THE APP -->
 <script type="text/javascript" src="js/app.js"></script>
 
 <!-- START:Firebase -->
-<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
 <script type="text/javascript" src="js/firebase.js"></script>
-<script type="text/javascript">
-  setupFirebasePush();
-</script>
 <!-- END:Firebase -->
 
 </body>

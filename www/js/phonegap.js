@@ -1,22 +1,19 @@
 var setupPhonegapPush = function() {
-  if (!window.PushNotification) {
-    return;
-  }
 
   var push = window.PushNotification.init({
-    "android": {
-      "senderID": "604077393164"
+    android: {
+      senderID: '604077393164'
     },
-    "browser": {},
-    "ios": {
-      "sound": true,
-      "vibration": true,
-      "badge": true,
-      // use fcm to push via APNs (not received)
-      // "senderID": "604077393164",
-      // "gcmSandbox": "false"
+    browser: {},
+    ios: {
+      sound: true,
+      vibration: true,
+      badge: true,
+      // use fcm to push via APNs
+      senderID: '604077393164',
+      gcmSandbox: false
     },
-    "windows": {}
+    windows: {}
   });
 
   push.on('registration', function(data) {
@@ -30,6 +27,11 @@ var setupPhonegapPush = function() {
 
   push.on('notification', function(data) {
     pushManager.handleNotification(data);
+
+    // callback after finishing handling (iOS)
+    push.finish();
   });
 
 };
+
+pushManager.requestPermissionCallback = setupPhonegapPush;

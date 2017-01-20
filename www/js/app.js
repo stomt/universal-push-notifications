@@ -1,4 +1,5 @@
 var pushManager = {
+  requestInitializationCallback: null,
   requestPermissionCallback: null,
 
   setRegistrationId: function(id) {
@@ -26,6 +27,13 @@ var pushManager = {
       'Ok'                  // buttonName
     );
   },
+
+  requestInitialization: function() {
+    if (this.requestInitializationCallback) {
+      this.requestInitializationCallback();
+    }
+  },
+
 
   requestPermission: function() {
     if (this.requestPermissionCallback) {
